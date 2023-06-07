@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adicionar Topik</title>
+</head>
+<body>
+    {% include 'menu.html' %}
+    <h1>Adicionar Topik</h1>
+    <form action="/adicionar-topik" method="POST">
+        <label for="horario">Horário:</label>
+        <input type="text" name="horario" id="horario">
+        <br>
+        <label for="motorista">Motorista:</label>
+        <input type="text" name="motorista" id="motorista">
+        <br>
+        <label for="destino">Destino:</label>
+        <input type="text" name="destino" id="destino">
+        <br>
+        <input type="submit" value="Adicionar">
+    </form>
+</body>
+</html>
