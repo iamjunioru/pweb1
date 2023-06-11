@@ -16,9 +16,9 @@ def listar_topiks():
 @app.route('/adicionar-topik', methods=['GET', 'POST'])
 def adicionar_topik():
     if request.method == 'POST':
-        horario = request.form['horario']
-        motorista = request.form['motorista']
-        destino = request.form['destino']
+        horario = request.form.get('horario')
+        motorista = request.form.get('motorista')
+        destino = request.form.get('destino')
         topik_id = len(topiks) + 1
         topik = {"id": topik_id, "horario": horario, "motorista": motorista, "destino": destino}
         topiks.append(topik)
@@ -29,9 +29,9 @@ def adicionar_topik():
 def editar_topik(id):
     topik = next((topik for topik in topiks if topik['id'] == id), None)
     if request.method == 'POST':
-        topik['horario'] = request.form['horario']
-        topik['motorista'] = request.form['motorista']
-        topik['destino'] = request.form['destino']
+        topik['horario'] = request.form.get('horario')
+        topik['motorista'] = request.form.get('motorista')
+        topik['destino'] = request.form.get('destino')
         return redirect('/listar-topiks')
     return render_template('editar_topik.html', topik=topik)
 
