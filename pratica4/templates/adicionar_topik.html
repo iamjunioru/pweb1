@@ -5,18 +5,25 @@
 </head>
 <body>
     {% include 'menu.html' %}
-    <h1>Adicionar Topik</h1>
-    <form action="/adicionar-topik" method="POST">
-        <label for="horario">Horário:</label>
-        <input type="text" name="horario" id="horario">
-        <br>
-        <label for="motorista">Motorista:</label>
-        <input type="text" name="motorista" id="motorista">
-        <br>
-        <label for="destino">Destino:</label>
-        <input type="text" name="destino" id="destino">
-        <br>
-        <input type="submit" value="Adicionar">
-    </form>
+    <div class="container">
+        <div class="page-content">
+            <h1>Adicionar Topik</h1>
+            <form action="/adicionar-topik" method="POST">
+                <label for="horario">Horário:</label>
+                <br>
+                <input type="text" name="horario" id="horario">
+                <br>
+                <label for="motorista">Motorista:</label>
+                <br>
+                <input type="text" name="motorista" id="motorista">
+                <br>
+                <label for="destino">Destino:</label>
+                <br>
+                <input type="text" name="destino" id="destino">
+                <br>
+                <input type="submit" value="Adicionar">
+            </form>
+        </div>
+    </div>
 </body>
 </html>

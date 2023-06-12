@@ -2,21 +2,26 @@
 <html>
 <head>
     <title>Editar Topik</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     {% include 'menu.html' %}
-    <h1>Editar Topik</h1>
-    <form action="/editar-topik/{{ topik.id }}" method="POST">
-        <label for="horario">Horário:</label>
-        <input type="text" name="horario" id="horario" value="{{ topik.horario }}">
-        <br>
-        <label for="motorista">Motorista:</label>
-        <input type="text" name="motorista" id="motorista" value="{{ topik.motorista }}">
-        <br>
-        <label for="destino">Destino:</label>
-        <input type="text" name="destino" id="destino" value="{{ topik.destino }}">
-        <br>
-        <input type="submit" value="Salvar">
-    </form>
+    <div class="container">
+        <div class="page-content">
+            <h1>Editar Topik</h1>
+            <form action="/editar-topik/{{ topik.id }}" method="POST">
+                <label for="horario">Horário:</label>
+                <input type="text" name="horario" id="horario" value="{{ topik.horario }}">
+                <br>
+                <label for="motorista">Motorista:</label>
+                <input type="text" name="motorista" id="motorista" value="{{ topik.motorista }}">
+                <br>
+                <label for="destino">Destino:</label>
+                <input type="text" name="destino" id="destino" value="{{ topik.destino }}">
+                <br>
+                <input type="submit" value="Salvar">
+            </form>
+        </div>
+    </div>
 </body>
 </html>

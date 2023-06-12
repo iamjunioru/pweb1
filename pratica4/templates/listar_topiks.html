@@ -5,29 +5,33 @@
 </head>
 <body>
     {% include 'menu.html' %}
-    <h1>Lista de Topiks</h1>
-    <table>
-        <tr>
-            <th>ID |</th>
-            <th>Horário |</th>
-            <th>Motorista |</th>
-            <th>Destino |</th>
-            <th>Ações</th>
-        </tr>
-        {% for topik in topiks %}
-            <tr>
-                <td>{{ topik.id }}</td>
-                <td>{{ topik.horario }}</td>
-                <td>{{ topik.motorista }}</td>
-                <td>{{ topik.destino }}</td>
-                <td>
-                    <a href="/editar-topik/{{ topik.id }}">Editar</a>
-                    <form action="/excluir-topik/{{ topik.id }}" method="POST">
-                        <input type="submit" value="Excluir">
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="container">
+        <div class="page-content">
+            <h1>Lista de Topiks</h1>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Horário</th>
+                    <th>Motorista</th>
+                    <th>Destino</th>
+                    <th>Ações</th>
+                </tr>
+                {% for topik in topiks %}
+                    <tr>
+                        <td>{{ topik.id }}</td>
+                        <td>{{ topik.horario }}</td>
+                        <td>{{ topik.motorista }}</td>
+                        <td>{{ topik.destino }}</td>
+                        <td>
+                            <a href="/editar-topik/{{ topik.id }}">Editar</a>
+                            <form action="/excluir-topik/{{ topik.id }}" method="POST">
+                                <input type="submit" value="Excluir">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </body>
 </html>
