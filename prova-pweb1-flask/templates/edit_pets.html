@@ -1,0 +1,9 @@
+{% include 'menu.html' %}
+<h1>Edit Pets</h1>
+<form action="/edit-pets/{{ id }}" method="post">
+  <label for="tutor">Tutor:</label>
+  <input class="input-style" type="text" id="tutor" name="tutor" value="{{ pet['tutor'] }}"><br><br>
+  <label for="name">Pet:</label>
+  <input class="input-style" type="text" id="pet" name="pet" value="{{ pet['pet'] }}"><br><br>
+  <button type="submit">Update Pet</button>
+</form>

@@ -1,0 +1,23 @@
+{% include 'menu.html' %}
+<h1>List Pets Screen.</h1>
+<table class="pet-table">
+  <tr>
+    <th>ID</th>
+    <th>Tutor</th>
+    <th>Name</th>
+    <th>Actions</th>
+  </tr>
+  {% for pet in pets %}
+  <tr>
+    <td>{{ pet['id'] }}</td>
+    <td>{{ pet['tutor'] }}</td>
+    <td>{{ pet['pet'] }}</td>
+    <td>
+      <a href="/edit-pets/{{ pet['id'] }}" class="edit-link">Edit</a>
+      <form action="/delete-pets/{{ pet['id'] }}" method="post" style="display:inline;">
+        <button type="submit" class="delete-button">Delete</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
