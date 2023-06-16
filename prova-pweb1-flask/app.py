@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # array
 pets = [
-    {"id": 1, "tutor": "Junior", "pet": "Miguel"}
+    {"id": 1, "tutor": "Junior", "pet": "Miguel", "species": "cat", "birthdate": "15/06/2023"},
 ]
 
 # for start on 2 (id)
@@ -25,14 +25,24 @@ def listPet():
 # add pets
 @app.route('/add-pets', methods=['GET', 'POST'])
 def addPet():
+    global next_id  # Adicionar a declaração para usar a variável globalmente
+
     if request.method == 'POST':
-        global next_id
         tutor = request.form['tutor']
         pet = request.form['pet']
-        pets.append({"id": next_id, "tutor": tutor, "pet": pet})
+        species = request.form['species']
+        birthdate = request.form['birthdate'] 
+        
+        if not tutor or not pet or not species or not birthdate: 
+            error_message = "all fieldsf are required."
+            return render_template('add_pets.html', error_message=error_message)
+
+        pets.append({"id": next_id, "tutor": tutor, "pet": pet, "species": species, "birthdate": birthdate})
         next_id += 1
         return redirect('/list-pets')
+
     return render_template('add_pets.html')
+
 
 # edit pets
 @app.route('/edit-pets/<int:id>', methods=['GET', 'POST'])
@@ -53,6 +63,18 @@ def deletePet(id):
     global pets
     pets = [pet for pet in pets if pet['id'] != id]
     return redirect('/list-pets')
+
+# search pets
+@app.route('/search-pets', methods=['GET', 'POST'])
+def searchPets():
+    if request.method == 'POST':
+        search_query = request.form['search']
+        search_results = []
+        for pet in pets:
+            if search_query.lower() in pet['tutor'].lower() or search_query.lower() in pet['pet'].lower():
+                search_results.append(pet)
+        return render_template('search_pets.html', search_results=search_results)
+    return render_template('search_pets.html')
 
 # start
 if __name__ == '__main__':

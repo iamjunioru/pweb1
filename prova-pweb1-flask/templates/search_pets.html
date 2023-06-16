@@ -1,0 +1,32 @@
+{% include 'menu.html' %}
+<h1>Search Pets.</h1>
+<form action="/search-pets" method="post">
+  <label for="search">Search:</label>
+  <input class="input-style" type="text" id="search" name="search" placeholder="Search pets"><br><br>
+  <button type="submit">Search</button>
+</form>
+<br>
+{% if search_results %}
+<h2>Search Results:</h2>
+<table class="pet-table">
+  <tr>
+    <th>ID</th>
+    <th>Tutor</th>
+    <th>Pet</th>
+    <th>Actions</th>
+  </tr>
+  {% for pet in search_results %}
+  <tr>
+    <td>{{ pet['id'] }}</td>
+    <td>{{ pet['tutor'] }}</td>
+    <td>{{ pet['pet'] }}</td>
+    <td>
+      <a href="/edit-pets/{{ pet['id'] }}" class="edit-link">Edit</a>
+      <form action="/delete-pets/{{ pet['id'] }}" method="post" style="display:inline;">
+        <button type="submit" class="delete-button">Delete</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
