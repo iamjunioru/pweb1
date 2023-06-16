@@ -9,7 +9,7 @@ pets = [
     {"id": 1, "tutor": "Junior", "pet": "Miguel"}
 ]
 
-# for start on 2
+# for start on 2 (id)
 next_id = 2
 
 # home
@@ -28,8 +28,8 @@ def addPet():
     if request.method == 'POST':
         global next_id
         tutor = request.form['tutor']
-        name = request.form['pet']
-        pets.append({"id": next_id, "tutor": tutor, "name": name})
+        pet = request.form['pet']
+        pets.append({"id": next_id, "tutor": tutor, "pet": pet})
         next_id += 1
         return redirect('/list-pets')
     return render_template('add_pets.html')
