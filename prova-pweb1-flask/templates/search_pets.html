@@ -21,9 +21,9 @@
     <td>{{ pet['tutor'] }}</td>
     <td>{{ pet['pet'] }}</td>
     <td>
-      <a href="/edit-pets/{{ pet['id'] }}" class="edit-link">Edit</a>
+      <a href="/edit-pets/{{ pet['id'] }}" class="edit-link"><i class="fa fa-pencil"></i></a>
       <form action="/delete-pets/{{ pet['id'] }}" method="post" style="display:inline;">
-        <button type="submit" class="delete-button">Delete</button>
+        <button type="submit" class="delete-button"><i class="fa fa-trash"></i></button>
       </form>
     </td>
   </tr>
