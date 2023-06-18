@@ -1,17 +1,66 @@
 {% include 'menu.html' %}
-<h1>Add Pets Screen.</h1>
-<form action="/add-pets" method="post">
-  <label for="tutor">Tutor:</label>
-  <br>
-  <input class="input-style" type="text" id="tutor" name="tutor"><br><br>
-  <label for="pet">Pet:</label>
-  <br>
-  <input class="input-style" type="text" id="pet" name="pet"><br><br>
-  <label for="species">Species:</label>
-  <br>
-  <input class="input-style" type="text" id="species" name="species"><br><br>
-  <label for="birthdate">Birthdate:</label>
-  <br>
-  <input class="input-style" type="text" id="birthdate" name="birthdate"><br><br>
-  <button type="submit">Add Pet</button>
-</form>
+<style>
+  .add-pets-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .add-pets-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+  }
+
+  .add-pets-form label {
+    margin-bottom: 5px;
+  }
+
+  .add-pets-form input[type="text"] {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .add-pets-form button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .add-pets-form button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="add-pets-container">
+  <div class="add-pets-form">
+    <h1>Add Pets Screen</h1>
+    <form action="/add-pets" method="post">
+      <label for="tutor">Tutor:</label>
+      <input class="input-style" type="text" id="tutor" name="tutor">
+      <label for="pet">Pet:</label>
+      <input class="input-style" type="text" id="pet" name="pet">
+      <label for="species">Species:</label>
+      <input class="input-style" type="text" id="species" name="species">
+      <label for="birthdate">Birthdate:</label>
+      <input class="input-style" type="text" id="birthdate" name="birthdate">
+      <button type="submit">Add Pet</button>
+    </form>
+  </div>
+</div>

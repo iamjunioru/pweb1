@@ -1,9 +1,62 @@
 {% include 'menu.html' %}
-<h1>Edit Pets</h1>
-<form action="/edit-pets/{{ id }}" method="post">
-  <label for="tutor">Tutor:</label>
-  <input class="input-style" type="text" id="tutor" name="tutor" value="{{ pet['tutor'] }}"><br><br>
-  <label for="pet">Pet:</label>
-  <input class="input-style" type="text" id="pet" name="pet" value="{{ pet['pet'] }}"><br><br>
-  <button type="submit">Update Pet</button>
-</form>
+<style>
+  .edit-pets-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .edit-pets-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+  }
+
+  .edit-pets-form label {
+    margin-bottom: 5px;
+  }
+
+  .edit-pets-form input[type="text"] {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .edit-pets-form button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .edit-pets-form button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="edit-pets-container">
+  <div class="edit-pets-form">
+    <h1>Edit Pets</h1>
+    <form action="/edit-pets/{{ id }}" method="post">
+      <label for="tutor">Tutor:</label>
+      <input class="input-style" type="text" id="tutor" name="tutor" value="{{ pet['tutor'] }}">
+      <label for="pet">Pet:</label>
+      <input class="input-style" type="text" id="pet" name="pet" value="{{ pet['pet'] }}">
+      <button type="submit">Update Pet</button>
+    </form>
+  </div>
+</div>
