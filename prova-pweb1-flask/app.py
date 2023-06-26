@@ -73,8 +73,7 @@ def searchPets():
         for pet in pets:
             if search_query.lower() in pet['tutor'].lower() or search_query.lower() in pet['pet'].lower():
                 search_results.append(pet)
-        return render_template('search_pets.html', search_results=search_results)
-    return render_template('search_pets.html')
+    return render_template('search_pets.html', search_results=search_results)
 
 # start
 if __name__ == '__main__':
