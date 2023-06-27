@@ -25,7 +25,7 @@ def listPet():
 # add pets
 @app.route('/add-pets', methods=['GET', 'POST'])
 def addPet():
-    global next_id  # Adicionar a declaração para usar a variável globalmente
+    global next_id  # adicionar a declaração para usar a variável globalmente
 
     if request.method == 'POST':
         tutor = request.form['tutor']
@@ -73,8 +73,7 @@ def searchPets():
         for pet in pets:
             if search_query.lower() in pet['tutor'].lower() or search_query.lower() in pet['pet'].lower():
                 search_results.append(pet)
-    return render_template('search_pets.html', search_results=search_results)
-
+    return render_template('search_pets.html')
 # start
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,10 +1,50 @@
 {% include 'menu.html' %}
+
+<style>
+
+#search {
+  padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 10px;
+    margin: 5px;
+    width: 95%;
+    box-sizing: border-box;
+}
+
+#input-style {
+  background-color: #00eeff;
+  list-style-type: none;
+  padding: auto;
+  margin: auto;
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100px;
+  height: 60px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #fff;
+}
+
+#input-style:hover {
+  background-color: #0db3be;
+}
+
+</style>
+
+
 <h1>Search Pets.</h1>
 <form action="/search-pets" method="post">
   <label for="search">Search:</label>
   <br>
-  <input class="input-style" type="text" id="search" name="search" placeholder="Search pets..."><br><br>
-  <button type="submit">Search</button>
+  <input class="input-search" type="text" id="search" name="search" placeholder="Search pets..."><br><br>
+  <button id="input-style" type="submit">Search</button>
 </form>
 <br>
 {% if search_results %}

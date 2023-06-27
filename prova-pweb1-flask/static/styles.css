@@ -8,16 +8,12 @@ body {
   padding: 0;
 }
 
-nav {
-  background-color: #f2f2f2;
-}
-
 ul.menu {
   list-style-type: none;
   padding: auto;
   margin: auto;
   display: flex;
-  background-color: #ffffff;
+  background-color: #00eeff ;
   font-weight: bold;
 }
 
@@ -27,14 +23,14 @@ ul.menu li {
 
 ul.menu li a {
   text-decoration: none;
-  color: #333;
+  color: #fff;
   display: block;
   padding: 10px;
   transition: background-color 0.3s ease;
 }
 
 ul.menu li a:hover {
-  background-color: #ccc;
+  background-color: #1ebcc7;
 }
 
 .pet-table {
@@ -59,9 +55,10 @@ ul.menu li a:hover {
   background-color: #00eeff;
   color: white;
   border: none;
-  padding: 4px 6px;
   cursor: pointer;
   border-radius: 5px;
+  margin: 3px;
+  padding: 5px;
 }
 
 .delete-button {
@@ -77,24 +74,17 @@ ul.menu li a:hover {
   background-color: darkred;
 }
 
-.input-style {
-  padding: 10px;
-  border: 2px solid #00eeff;
-  border-radius: 5px;
-  font-size: 16px;
-  color: #00eeff;
-  outline: none;
-}
-
-.input-style:focus {
-  border-color: #00eeff;
-
-  box-shadow: 0 0 0 0.2rem rgba(162, 249, 255, 0.25);
-}
-
 a {
   text-decoration: none;
   color: red;
+}
+
+.input-style {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 5px;
+  width: 100%;
 }
 
 footer {
@@ -102,6 +92,29 @@ footer {
   width: 100%;
   text-align: center;
   padding: 3px;
-  background-color: #00eeff;
+  background-image: url('https://media.istockphoto.com/id/1011583734/vector/monochrome-black-and-white-dog-cat-pet-animal-paw-foot-hand-drawn-ink-sketch-seamless.jpg?s=612x612&w=0&k=20&c=JSFAQeJvgctndBMWWjBA7qeOME7crE51XBFf4v_QooE=');
   color: white;
+  box-shadow: 0px 0px 5px #c2c2c2;
+}
+
+.homescreen {
+  margin: 50px;
+  padding: 50px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 100px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px #c2c2c2;
+  border-radius: 10px;
+  transition: ease-in 0.5s; 
+}
+
+.homescreen:hover {
+  background-image: url('https://i.pinimg.com/originals/3c/03/e6/3c03e6afb5996b120c76ec429dfd7be5.png');
+  background-size: cover;
+  color: #fff;
+  transform: scale(1.1);
 }
