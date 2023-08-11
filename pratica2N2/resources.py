@@ -49,10 +49,13 @@ class TutorResource(Resource):
         tutor = Tutor.query.get(tutor_id)
         if not tutor:
             return {'message': 'Tutor not found'}, 404
+
+        if tutor.pets:
+            return {'message': 'Cannot delete tutor with associated pets'}, 400
         
         db.session.delete(tutor)
         db.session.commit()
-        return {'message': 'Tutor deleted'}, 204
+        return {'message': 'Tutor deleted successfully'}, 204
 
 
 class PetResource(Resource):
