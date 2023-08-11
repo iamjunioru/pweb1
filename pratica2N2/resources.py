@@ -42,9 +42,8 @@ class TutorResource(Resource):
         
         tutor.nome = args['nome_tutor']
         db.session.commit()
-        tutor_schema = TutorSchema()
-        tutor_data = tutor_schema.dump(tutor)
-        return tutor_data, 200
+
+        return {'message': 'Tutor updated successfully'}, 200
 
     def delete(self, tutor_id):
         tutor = Tutor.query.get(tutor_id)
