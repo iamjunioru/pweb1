@@ -1,4 +1,3 @@
-# resources.py
 from flask_restful import Resource, reqparse
 from flask import jsonify
 from models import db, Tutor, Pet, TutorSchema, PetSchema
@@ -13,7 +12,13 @@ class TutorResource(Resource):
         if not tutor:
             return {'message': 'Tutor not found'}, 404
 
-        return TutorSchema().dump(tutor), 200
+        tutor_data = {
+            'id': tutor.id,
+            'nome': tutor.nome,
+            'pets': [{'id': pet.id, 'nome': pet.nome} for pet in tutor.pets]
+        }
+
+        return tutor_data, 200
 
     def post(self):
         parser = reqparse.RequestParser()
@@ -22,7 +27,9 @@ class TutorResource(Resource):
         tutor = Tutor(nome=args['nome_tutor'])
         db.session.add(tutor)
         db.session.commit()
-        return TutorSchema().dump(tutor), 201
+        tutor_schema = TutorSchema()
+        tutor_data = tutor_schema.dump(tutor)
+        return tutor_data, 201
 
     def put(self, tutor_id):
         tutor = Tutor.query.get(tutor_id)
@@ -35,7 +42,9 @@ class TutorResource(Resource):
         
         tutor.nome = args['nome_tutor']
         db.session.commit()
-        return TutorSchema().dump(tutor), 200
+        tutor_schema = TutorSchema()
+        tutor_data = tutor_schema.dump(tutor)
+        return tutor_data, 200
 
     def delete(self, tutor_id):
         tutor = Tutor.query.get(tutor_id)
@@ -48,9 +57,20 @@ class TutorResource(Resource):
 
 
 class PetResource(Resource):
-    def get(self, pet_id):
-        pet = Pet.query.get(pet_id)
-        return PetSchema().dump(pet), 200
+    def get(self, pet_id=None, tutor_id=None):
+        if pet_id is not None:
+            pet = Pet.query.get(pet_id)
+            if not pet:
+                return {'message': 'Pet not found'}, 404
+            pet_schema = PetSchema()
+            pet_data = pet_schema.dump(pet)
+            return pet_data, 200
+
+        if tutor_id is not None:
+            pets = Pet.query.filter_by(tutor_id=tutor_id).all()
+            pet_schema = PetSchema(many=True)
+            pets_data = pet_schema.dump(pets)
+            return pets_data, 200
 
     def post(self):
         parser = reqparse.RequestParser()
@@ -65,7 +85,9 @@ class PetResource(Resource):
         pet = Pet(nome=args['nome_pet'], tutor=tutor)
         db.session.add(pet)
         db.session.commit()
-        return PetSchema().dump(pet), 201
+        pet_schema = PetSchema()
+        pet_data = pet_schema.dump(pet)
+        return pet_data, 201
 
     def put(self, pet_id):
         pet = Pet.query.get(pet_id)
@@ -78,7 +100,9 @@ class PetResource(Resource):
         
         pet.nome = args['nome_pet']
         db.session.commit()
-        return PetSchema().dump(pet), 200
+        pet_schema = PetSchema()
+        pet_data = pet_schema.dump(pet)
+        return pet_data, 200
 
     def delete(self, pet_id):
         pet = Pet.query.get(pet_id)
