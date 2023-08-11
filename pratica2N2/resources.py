@@ -16,7 +16,7 @@ class GetAllResource(Resource):
             }
             tutors_data.append(tutor_data)
 
-        return tutors_data, 200
+        return jsonify(tutors_data)
 
 
 class TutorResource(Resource):
@@ -35,7 +35,7 @@ class TutorResource(Resource):
             "pets": [{"id": pet.id, "nome": pet.nome} for pet in tutor.pets],
         }
 
-        return jsonify(tutor_data), 200
+        return jsonify(tutor_data)
 
     def post(self):
         parser = reqparse.RequestParser()
@@ -46,12 +46,12 @@ class TutorResource(Resource):
         db.session.commit()
         tutor_schema = TutorSchema()
         tutor_data = tutor_schema.dump(tutor)
-        return tutor_data, 201
+        return jsonify(tutor_data)
 
     def put(self, tutor_id):
         tutor = Tutor.query.get(tutor_id)
         if not tutor:
-            return {"message": "Tutor not found"}, 404
+           return jsonify({"message": "Tutor not found"})
 
         parser = reqparse.RequestParser()
         parser.add_argument("nome_tutor", type=str, required=True)
@@ -60,19 +60,19 @@ class TutorResource(Resource):
         tutor.nome = args["nome_tutor"]
         db.session.commit()
 
-        return {"message": "Tutor updated successfully"}, 200
+        return jsonify({"message": "Tutor updated successfully", "tutor": tutor.nome})
 
     def delete(self, tutor_id):
         tutor = Tutor.query.get(tutor_id)
         if not tutor:
-            return {"message": "Tutor not found"}, 404
+            return jsonify({"message": "Tutor not found"})
 
         if tutor.pets:
-            return {"message": "Cannot delete tutor with associated pets"}, 400
+            return jsonify({"message": "Tutor has associated pets"})
 
         db.session.delete(tutor)
         db.session.commit()
-        return {"message": "Tutor deleted successfully"}, 204
+        return jsonify({"message": "Tutor deleted successfully"})
 
 
 class PetResource(Resource):
@@ -83,13 +83,13 @@ class PetResource(Resource):
                 return {"message": "Pet not found"}, 404
             pet_schema = PetSchema()
             pet_data = pet_schema.dump(pet)
-            return pet_data, 200
+            return jsonify(pet_data)
 
         if tutor_id is not None:
             pets = Pet.query.filter_by(tutor_id=tutor_id).all()
             pet_schema = PetSchema(many=True)
             pets_data = pet_schema.dump(pets)
-            return pets_data, 200
+            return jsonify(pets_data)
 
     def post(self):
         parser = reqparse.RequestParser()
@@ -99,19 +99,19 @@ class PetResource(Resource):
 
         tutor = Tutor.query.get(args["tutor_id"])
         if not tutor:
-            return {"message": "Tutor not found"}, 404
+            return jsonify({"message": "Tutor not found"})
 
         pet = Pet(nome=args["nome_pet"], tutor=tutor)
         db.session.add(pet)
         db.session.commit()
         pet_schema = PetSchema()
         pet_data = pet_schema.dump(pet)
-        return pet_data, 201
+        return jsonify(pet_data)
 
     def put(self, pet_id):
         pet = Pet.query.get(pet_id)
         if not pet:
-            return {"message": "Pet not found"}, 404
+            return jsonify({"message": "Pet not found"})
 
         parser = reqparse.RequestParser()
         parser.add_argument("nome_pet", type=str, required=True)
@@ -121,13 +121,12 @@ class PetResource(Resource):
         db.session.commit()
         pet_schema = PetSchema()
         pet_data = pet_schema.dump(pet)
-        return pet_data, 200
-
+        return jsonify({"message": "Pet updated successfully", "pet": pet.nome})
     def delete(self, pet_id):
         pet = Pet.query.get(pet_id)
         if not pet:
-            return {"message": "Pet not found"}, 404
+            return jsonify({"message": "Pet not found"})
 
         db.session.delete(pet)
         db.session.commit()
-        return {"message": "Pet deleted"}, 204
+        return jsonify({"message": "Pet deleted successfully"})
