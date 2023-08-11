@@ -2,6 +2,21 @@ from flask_restful import Resource, reqparse
 from flask import jsonify
 from models import db, Tutor, Pet, TutorSchema, PetSchema
 
+class GetAllResource(Resource):
+    def get(self):
+        tutors = Tutor.query.all()
+        tutors_data = []
+
+        for tutor in tutors:
+            tutor_data = {
+                'id': tutor.id,
+                'nome': tutor.nome,
+                'pets': [{'id': pet.id, 'nome': pet.nome} for pet in tutor.pets]
+            }
+            tutors_data.append(tutor_data)
+
+        return tutors_data, 200
+    
 class TutorResource(Resource):
     def get(self, tutor_id=None):
         if tutor_id is None:
